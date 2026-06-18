@@ -319,26 +319,28 @@
         const ADMIN_USERNAME = "admin";
 const ADMIN_PASSWORD = "123456";
 
-const originalSwitchView = switchView;
+function switchView(view) {
+    const storeView = document.getElementById('store-view');
+    const adminView = document.getElementById('admin-view');
 
-switchView = function(view) {
     if (view === 'admin') {
         const username = prompt("اسم المستخدم");
         const password = prompt("كلمة المرور");
 
-        if (
-            username === ADMIN_USERNAME &&
-            password === ADMIN_PASSWORD
-        ) {
-            originalSwitchView('admin');
-        } else {
+        if (username !== "admin" || password !== "123456") {
             alert("بيانات الدخول غير صحيحة");
+            return;
         }
-        return;
     }
 
-    originalSwitchView(view);
-};
+    if (view === 'store') {
+        adminView.classList.add('view-hidden');
+        setTimeout(() => storeView.classList.remove('view-hidden'), 150);
+    } else {
+        storeView.classList.add('view-hidden');
+        setTimeout(() => adminView.classList.remove('view-hidden'), 150);
+    }
+}
         // قاعدة البيانات الأساسية للمنتجات
         let products = [
             { id: 1, name: "نظام السطو على البنوك المتقدم", price: 24.99, category: "scripts", desc: "سكربت ميثاق وسرقة البنوك تفاعلي بالكامل مع ميني جيمز مميزة.", tag: "حصري", image: "", visible: true },
