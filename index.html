@@ -316,9 +316,6 @@
 
     <script>
         
-        const ADMIN_USERNAME = "admin";
-const ADMIN_PASSWORD = "123456";
-
 function switchView(view) {
     const storeView = document.getElementById('store-view');
     const adminView = document.getElementById('admin-view');
@@ -327,18 +324,18 @@ function switchView(view) {
         const username = prompt("اسم المستخدم");
         const password = prompt("كلمة المرور");
 
-        if (username !== "admin" || password !== "123456") {
-            alert("بيانات الدخول غير صحيحة");
-            return;
+        if (username === "admin" && password === "123456") {
+            storeView.classList.add('view-hidden');
+            setTimeout(() => adminView.classList.remove('view-hidden'), 150);
+        } else {
+            alert("❌ اسم المستخدم أو كلمة المرور خطأ");
         }
+        return;
     }
 
     if (view === 'store') {
         adminView.classList.add('view-hidden');
         setTimeout(() => storeView.classList.remove('view-hidden'), 150);
-    } else {
-        storeView.classList.add('view-hidden');
-        setTimeout(() => adminView.classList.remove('view-hidden'), 150);
     }
 }
         // قاعدة البيانات الأساسية للمنتجات
